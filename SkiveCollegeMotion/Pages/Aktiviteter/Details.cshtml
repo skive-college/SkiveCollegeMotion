@@ -1,0 +1,43 @@
+﻿@page
+@model SkiveCollegeMotion.Pages.Aktiviteter.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Aktivitet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktivitet.Navn)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Aktivitet.Navn)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktivitet.Sted)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Aktivitet.Sted)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktivitet.Antal)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Aktivitet.Antal)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Aktivitet.Ansvarlig)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Aktivitet.Ansvarlig)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Aktivitet.ID">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
