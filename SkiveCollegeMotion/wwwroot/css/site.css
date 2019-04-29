@@ -101,3 +101,19 @@ header img {
         background-image: linear-gradient(to top right, #2865fa, #02e5a9);
         color: white;
     }
+    .create {
+        padding: 25px 0;
+
+    }
+.create-it {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #484B4E;
+    font-size: 36px;
+    font-style: italic;
+    font-weight: 900;
+    white-space: nowrap;
+    line-height: 24px;
+}
+.create-it .focus {
+    color: #F6CA44;
+}
