@@ -11,13 +11,11 @@
     <form method="post">
         <fieldset>
             <legend></legend>
-
-                @Html.LabelFor(model => model.Aktivitet, htmlAttributes: new { @class = "control-label col-md-2" })
                 <br />
-                <div>
+                <div class="tilmeld">
                     <br />
                     @foreach (var item in Model.Aktivitet) {
-                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label("   " + item.Navn); <br />
+                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label("   " + item.Navn + " (" + item.Antal + ")"); <br />
                 }
                 </div>
                 <br />

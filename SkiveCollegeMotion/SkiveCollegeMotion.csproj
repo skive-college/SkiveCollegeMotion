@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Aktivitet\**" />
+    <Content Remove="Pages\Aktivitet\**" />
+    <EmbeddedResource Remove="Pages\Aktivitet\**" />
+    <None Remove="Pages\Aktivitet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 
@@ -13,10 +20,6 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\Aktivitet\" />
   </ItemGroup>
 
 </Project>
