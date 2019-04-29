@@ -6,18 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Data\Migrations\20190423104356_Initial.cs" />
-    <Compile Remove="Data\Migrations\20190423104356_Initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190429090604_Initial.cs" />
-    <Compile Remove="Data\Migrations\20190429090604_Initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190429091242_Initial.cs" />
-    <Compile Remove="Data\Migrations\20190429091242_Initial.Designer.cs" />
-    <Compile Remove="Data\Migrations\20190429091610_Initial.cs" />
-    <Compile Remove="Data\Migrations\20190429091610_Initial.Designer.cs" />
+    <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="12.1.2" />
+	<PackageReference Include="CsvHelper" Version="12.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
