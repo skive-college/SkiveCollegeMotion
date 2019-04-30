@@ -88,8 +88,8 @@ header img {
 .navbar-brand img {
     height: 30px;
 }
-.navbar-toggle .icon-bar {
-    background-color: #484b4e;
+.navbar-toggle, .icon-bar {
+    border: 1px solid #484b4e;
 }
 .navbar {
     background-color: rgba(255,255,255,0.85);
@@ -114,9 +114,14 @@ header img {
     font-weight: 900;
     white-space: nowrap;
     line-height: 24px;
+    border-top: 2px solid #DDD;
+    padding-top: .5em;
+    overflow:hidden;
+    min-height:1.5em;
 }
 .create-it .focus {
     color: #F6CA44;
+    
 }
 .body-content {
     margin-top: 4em;
