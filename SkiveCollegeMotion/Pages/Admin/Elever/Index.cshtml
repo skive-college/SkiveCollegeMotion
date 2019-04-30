@@ -1,0 +1,43 @@
+﻿@page
+@model SkiveCollegeMotion.Pages.Admin.EleverModel
+
+@{
+    ViewData["Title"] = "Elever";
+}
+
+<h2>Elever</h2>
+
+<p>
+    <a asp-page="Import">Importer csv</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Elev[0].Navn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Elev[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Elev[0].Email)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Elev) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Navn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
