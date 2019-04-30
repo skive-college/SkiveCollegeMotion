@@ -133,6 +133,25 @@ namespace SkiveCollegeMotion.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("SkiveCollegeMotion.Models.Aktivitet", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ansvarlig");
+
+                    b.Property<int>("Antal");
+
+                    b.Property<string>("Navn");
+
+                    b.Property<string>("Sted");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Aktivitet");
+                });
+
             modelBuilder.Entity("SkiveCollegeMotion.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -184,25 +203,6 @@ namespace SkiveCollegeMotion.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("SkiveCollegeMotion.Models.Aktivitet", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Ansvarlig");
-
-                    b.Property<int>("Antal");
-
-                    b.Property<string>("Navn");
-
-                    b.Property<string>("Sted");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Aktivitet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
