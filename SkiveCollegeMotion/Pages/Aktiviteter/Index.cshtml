@@ -1,0 +1,54 @@
+﻿@page
+@model SkiveCollegeMotion.Pages.Aktiviteter.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Motions aktiviteter</h2>
+
+<p>
+    <a asp-page="Create">Opret ny</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktivitet[0].Navn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktivitet[0].Sted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktivitet[0].Antal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aktivitet[0].Ansvarlig)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Aktivitet) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Navn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Antal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ansvarlig)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Rediger</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Detaljer</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Slet</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Aktivitet\**" />
+    <Content Remove="Pages\Aktivitet\**" />
+    <EmbeddedResource Remove="Pages\Aktivitet\**" />
+    <None Remove="Pages\Aktivitet\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 

@@ -14,5 +14,6 @@ namespace SkiveCollegeMotion.Data
             : base(options)
         {
         }
+        public DbSet<SkiveCollegeMotion.Models.Aktivitet> Aktivitet { get; set; }
     }
 }

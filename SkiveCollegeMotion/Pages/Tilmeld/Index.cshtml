@@ -1,0 +1,25 @@
+﻿@page
+@model SkiveCollegeMotion.Pages.Tilmeld.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Tilmeld aktivitet</h2>
+
+<div class="form-group">
+    <form method="post">
+        <fieldset>
+            <legend></legend>
+                <br />
+                <div class="tilmeld">
+                    <br />
+                    @foreach (var item in Model.Aktivitet) {
+                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label("   " + item.Navn + " (" + item.Antal + ")"); <br />
+                }
+                </div>
+                <br />
+                <input type="button" name="button" class="button1" value="Submit" />
+        </fieldset>
+    </form>
+</div>
