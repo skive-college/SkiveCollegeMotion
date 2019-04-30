@@ -13,6 +13,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190429071929_Initial.cs" />
+    <Compile Remove="Data\Migrations\20190429071929_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190430073601_tob.cs" />
+    <Compile Remove="Migrations\20190430073601_tob.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 
@@ -25,6 +34,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

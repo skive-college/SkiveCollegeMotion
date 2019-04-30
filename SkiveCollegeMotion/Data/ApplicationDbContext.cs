@@ -15,5 +15,6 @@ namespace SkiveCollegeMotion.Data
         {
         }
         public DbSet<SkiveCollegeMotion.Models.Aktivitet> Aktivitet { get; set; }
+        public DbSet<SkiveCollegeMotion.Models.Bruger> Bruger { get; set; }
     }
 }

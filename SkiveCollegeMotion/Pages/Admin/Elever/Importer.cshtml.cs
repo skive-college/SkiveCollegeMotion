@@ -23,14 +23,13 @@ using System.Security.Claims;
 
 namespace SkiveCollegeMotion.Pages.Admin.Elever
 {
-    [Authorize(Policy = "Admin")]
-    public class ImportModel : PageModel
+    public class ImporterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ImportModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ImporterModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -66,24 +65,27 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
                         };
                         string password = Security.getNewPassword(8);
                         var result = await _userManager.CreateAsync(user, password);
-                        if(user.UserName == "toke0344")
+                        if (result.Succeeded)
                         {
-                            await _userManager.AddClaimAsync(user, new Claim("UserType", "Teacher"));
+                            await _userManager.AddClaimAsync(user, new Claim("UserType", "Student"));
                             /*
                             string link = HtmlEncoder.Default.Encode("https://localhost:44341/Identity/Account/Login");
                             await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                             */
                         }
-                        foreach (var error in result.Errors)
+                        else
                         {
-                            ModelState.AddModelError(string.Empty, error.Description);
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
                         }
                     }
                 }
             }
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return RedirectToPage("Index");
+                return RedirectToPage("./Index");
             }
             return Page();
         }
