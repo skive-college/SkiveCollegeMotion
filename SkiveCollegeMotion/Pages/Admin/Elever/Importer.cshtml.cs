@@ -64,14 +64,17 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
                             Email = record.Username + "@skivecollege.dk"
                         };
                         string password = Security.getNewPassword(8);
+                        /*
+                        if (user.UserName == "toke0344")
+                        {
+                            string link = HtmlEncoder.Default.Encode("https://localhost:44341/Identity/Account/Login");
+                            await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
+                        }
+                        */
                         var result = await _userManager.CreateAsync(user, password);
                         if (result.Succeeded)
                         {
                             await _userManager.AddClaimAsync(user, new Claim("UserType", "Student"));
-                            /*
-                            string link = HtmlEncoder.Default.Encode("https://localhost:44341/Identity/Account/Login");
-                            await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
-                            */
                         }
                         else
                         {
