@@ -23,14 +23,13 @@ using System.Security.Claims;
 
 namespace SkiveCollegeMotion.Pages.Admin.Elever
 {
-    [Authorize(Policy = "Admin")]
-    public class ImportModel : PageModel
+    public class ImporterModel : PageModel
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IEmailSender _emailSender;
 
-        public ImportModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
+        public ImporterModel(SignInManager<ApplicationUser> signInManager, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -64,26 +63,34 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
                             UserName = record.Username,
                             Email = record.Username + "@skivecollege.dk"
                         };
-                        string password = Security.getNewPassword(8);
+                        string password = Security.getNewPassword();
+
+                        var callbackUrl = Url.Page(
+                            "/Account/Login",
+                            pageHandler: null,
+                            values: new { area = "Identity" },
+                            protocol: Request.Scheme);
+                        string link = HtmlEncoder.Default.Encode(callbackUrl);
+                        await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
+
                         var result = await _userManager.CreateAsync(user, password);
-                        if(user.UserName == "toke0344")
+                        if (result.Succeeded)
                         {
-                            await _userManager.AddClaimAsync(user, new Claim("UserType", "Teacher"));
-                            /*
-                            string link = HtmlEncoder.Default.Encode("https://localhost:44341/Identity/Account/Login");
-                            await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
-                            */
+                            await _userManager.AddClaimAsync(user, new Claim("UserType", "Student"));
                         }
-                        foreach (var error in result.Errors)
+                        else
                         {
-                            ModelState.AddModelError(string.Empty, error.Description);
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError(string.Empty, error.Description);
+                            }
                         }
                     }
                 }
             }
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return RedirectToPage("Index");
+                return RedirectToPage("./Index");
             }
             return Page();
         }
