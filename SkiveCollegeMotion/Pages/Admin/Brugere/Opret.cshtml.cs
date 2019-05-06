@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,11 +19,13 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IEmailSender _emailSender;
 
-        public OpretModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public OpretModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager, IEmailSender emailSender)
         {
             _context = context;
             _userManager = userManager;
+            _emailSender = emailSender;
         }
 
         public IActionResult OnGet()
@@ -47,7 +51,7 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
                     UserName = Bruger.Login,
                     Email = Bruger.Email
                 };
-                string password = Security.getNewPassword(8);
+                string password = Security.getNewPassword();
                 IdentityResult result = await _userManager.CreateAsync(bruger, password);
                 if (result.Succeeded)
                 {
@@ -56,11 +60,13 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
                     {
                         return RedirectToPage("./Index");
                     }
-
-                    /*
-                    string link = HtmlEncoder.Default.Encode("https://localhost:44341/Identity/Account/Login");
-                    await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
-                    */
+                    var callbackUrl = Url.Page(
+                        "/Account/Login",
+                        pageHandler: null,
+                        values: new { area = "Identity" },
+                        protocol: Request.Scheme);
+                    string link = HtmlEncoder.Default.Encode(callbackUrl);
+                    await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                 }
                 // result variable contains the instance with error(s).
                 foreach (var error in result.Errors)

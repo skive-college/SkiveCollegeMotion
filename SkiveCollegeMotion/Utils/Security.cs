@@ -28,10 +28,9 @@ namespace SkiveCollegeMotion.Utils
             return (int)(minValue + (ui % diff));
         }
         
-        public static string getNewPassword(int length)
+        public static string getNewPassword()
         {
-            // For testing
-            return "Kodeord1";
+            int length = 8;
             // Create 2D array with info on the different types of wanted characters with following format:
             // n = type number.
             // types[n, 0] = start index(inclusive) of wanted char range.
