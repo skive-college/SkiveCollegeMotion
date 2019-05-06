@@ -57,21 +57,21 @@ header img {
     background-color: #02e5a9;
 }
 
-.btn {
-    list-style-type: none;
+.mybutton {
+    display: block;
+    margin-bottom: 30px !important;
+    padding: 5px 20px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    background-image: linear-gradient(to top right, #2865fa, #02e5a9) !important;
+    color: white;
+    font-weight: bold;
+    width: 100%;
 }
-    .btn li {
-        margin: 10px;
-        padding: 5px 20px;
-        border: 1px solid #aaa;
-        border-radius: 5px;
-        background-image: linear-gradient(to top right, #2865fa, #02e5a9);
-    }
-        .btn li a {
-            color: white;
-            font-weight: bold;
-            width: 100%;
-        }
+.mybutton:hover {
+    color: #ccc;
+    text-decoration: none;
+}
 .btn-default {
     background-image: linear-gradient(to top right, #2865fa, #02e5a9);
     font-weight: bold;
