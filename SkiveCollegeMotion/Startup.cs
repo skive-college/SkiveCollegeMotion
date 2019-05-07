@@ -12,6 +12,10 @@ using Microsoft.EntityFrameworkCore;
 using SkiveCollegeMotion.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SkiveCollegeMotion.Services;
+using SkiveCollegeMotion.Models;
+using System.Security.Claims;
 
 namespace SkiveCollegeMotion
 {
@@ -34,18 +38,59 @@ namespace SkiveCollegeMotion
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequiredUniqueChars = 1;
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+            });
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddDefaultIdentity<ApplicationUser>()
+                //.AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Admin", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.HasClaim(c =>
+                            (c.Type == "UserType") &&
+                            (c.Value == "Teacher" ||
+                            c.Value == "SuperUser"))));
+            });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IEmailSender, EmailSender>(i => new EmailSender(
+                    Configuration["EmailSender:Host"],
+                    Configuration.GetValue<int>("EmailSender:Port"),
+                    Configuration.GetValue<bool>("EmailSender:EnableSSL"),
+                    Configuration["EmailSender:UserName"],
+                    Configuration["EmailSender:Password"]
+                )
+            );
+
+            services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                {
+                    options.Conventions.AuthorizeFolder("/");
+                    options.Conventions.AuthorizeFolder("/Admin", "Admin");
+                })
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -65,6 +110,30 @@ namespace SkiveCollegeMotion
             app.UseAuthentication();
 
             app.UseMvc();
+
+            CreateSuperUser(serviceProvider).Wait();
+        }
+
+        private async Task CreateSuperUser(IServiceProvider serviceProvider)
+        {
+            UserManager<ApplicationUser> userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            var poweruser = new ApplicationUser
+            {
+                Navn = Configuration["SuperUser:UserName"],
+                UserName = Configuration["SuperUser:UserName"]
+            };
+
+            var _user = await userManager.FindByNameAsync(poweruser.UserName);
+
+            if (_user == null)
+            {
+                string pwd = Configuration["SuperUser:UserPassword"];
+                var createPowerUser = await userManager.CreateAsync(poweruser, pwd);
+                if (createPowerUser.Succeeded)
+                {
+                    await userManager.AddClaimAsync(poweruser, new Claim("UserType", "SuperUser"));
+                }
+            }
         }
     }
 }

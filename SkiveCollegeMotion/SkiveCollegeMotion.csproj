@@ -13,13 +13,28 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\00000000000000_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190429071929_Initial.cs" />
+    <Compile Remove="Data\Migrations\20190429071929_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20190430073601_tob.cs" />
+    <Compile Remove="Migrations\20190430073601_tob.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 
   <ItemGroup>
+	<PackageReference Include="CsvHelper" Version="12.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.9" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
 </Project>

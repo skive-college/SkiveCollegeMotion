@@ -338,3 +338,5 @@ ASALocalRun/
 
 # BeatPulse healthcheck temp database
 healthchecksdb
+/SkiveCollegeMotion/Data/Migrations/20190430073507_mri.cs
+/SkiveCollegeMotion/Data/Migrations/20190430073507_mri.Designer.cs

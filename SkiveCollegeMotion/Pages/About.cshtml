@@ -1,9 +1,39 @@
 ﻿@page
 @model AboutModel
 @{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "Om Skive College Motion";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@Model.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<p>Med denne app kan undervisere oprette motions aktiviteter og invitere hold til at deltage i disse. </p>
+<p>Fremgangsmåden er som følgende:
+    <ol>
+        <li>Opret aktiviteter, aktiviterne skal have følgende data:
+            <ul>
+                <li>Navn - beskrivelse af aktiviteten</li>
+                <li>Sted - placering for aktiviteten</li>
+                <li>Antal - hvor mange deltagere er der plads til</li>
+                <li>Ansvarlig - Hvilken underviser er ansvarlig for denne aktivitet</li>
+            </ul>
+        </li>
+        <li>Indlæs hold: 
+            <ul>
+                <li>Hent/download holdlister som CSV filer fra jeres eksisterende system</li>
+                <li>Gå til menupunktet "Indlæs hold"</li>
+                <li>Find holdfilen i csv format og indlæs den</li>
+            </ul> </li>
+        <li>Holdet modtager en mail ved indlæsning, med link og adgangskode</li>
+        <li>Eleverne besøger linket, logger sig ind og vælger aktivitet</li>
+        <li>Underviserne kan herefter finde rapporter over hvem der har tilmeldt sig hvilke hold</li>
+        <li>Underviserne kan vælge at trække aktivitetsoversigter ud i forhold til:
+            <ul>
+                <li>Aktivitet</li>
+                <li>Hold</li>
+                <li>og Elevtype</li>
+            </ul>
+        </li>
+    </ol>
+</p>
+<br/>
+<p>Denne app er udviklet på AspIT Midtjylland som en projektopgave.</p>

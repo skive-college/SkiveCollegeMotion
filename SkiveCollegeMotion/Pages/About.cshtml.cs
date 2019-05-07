@@ -12,7 +12,7 @@ namespace SkiveCollegeMotion.Pages
 
         public void OnGet()
         {
-            Message = "Your application description page.";
+            Message = "Og hvordan du bruger denne App i praksis.";
         }
     }
 }
