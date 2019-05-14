@@ -58,15 +58,15 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
                     result = await _userManager.AddClaimAsync(bruger, new Claim("UserType", "Teacher"));
                     if (result.Succeeded)
                     {
+                        var callbackUrl = Url.Page(
+                            "/Account/Login",
+                            pageHandler: null,
+                            values: new { area = "Identity" },
+                            protocol: Request.Scheme);
+                        string link = HtmlEncoder.Default.Encode(callbackUrl);
+                        await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                         return RedirectToPage("./Index");
                     }
-                    var callbackUrl = Url.Page(
-                        "/Account/Login",
-                        pageHandler: null,
-                        values: new { area = "Identity" },
-                        protocol: Request.Scheme);
-                    string link = HtmlEncoder.Default.Encode(callbackUrl);
-                    await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                 }
                 // result variable contains the instance with error(s).
                 foreach (var error in result.Errors)

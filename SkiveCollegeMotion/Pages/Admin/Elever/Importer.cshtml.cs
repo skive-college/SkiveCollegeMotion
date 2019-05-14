@@ -34,7 +34,7 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
             _signInManager = signInManager;
             _userManager = userManager;
             _emailSender = emailSender;
-            
+
         }
 
         public IActionResult OnGet()
@@ -46,12 +46,12 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
         [Required]
         [CsvFile]
         public IFormFile UploadedFile { get; set; }
-        
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (ModelState.IsValid)
             {
-                using (StreamReader reader = new StreamReader(Request.Form.Files[0].OpenReadStream(), System.Text.Encoding.UTF8, true))
+                using (StreamReader reader = new StreamReader(Request.Form.Files[0].OpenReadStream(), Encoding.UTF8, true))
                 using (CsvReader csv = new CsvReader(reader))
                 {
                     csv.Configuration.Delimiter = ";";

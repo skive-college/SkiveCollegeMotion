@@ -1,6 +1,5 @@
 using CsvHelper.Configuration.Attributes;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace SkiveCollegeMotion.Models
 {

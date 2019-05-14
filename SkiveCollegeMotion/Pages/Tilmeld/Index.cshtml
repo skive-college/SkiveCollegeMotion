@@ -11,15 +11,22 @@
     <form method="post">
         <fieldset>
             <legend></legend>
+            <br />
+            <div class="tilmeld">
                 <br />
-                <div class="tilmeld">
+                @foreach (var item in Model.Aktivitet)
+                {
+                    @Html.RadioButtonFor(model => model.Valg, item.ID)
+                    @Html.Label("   " + item.Navn + " (" + item.Antal + ")");
                     <br />
-                    @foreach (var item in Model.Aktivitet) {
-                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label("   " + item.Navn + " (" + item.Antal + ")"); <br />
                 }
-                </div>
-                <br />
-                <input type="button" name="button" class="button1" value="Submit" />
+            </div>
+            <br />
+            <input type="submit" value="Submit" class="btn btn-default" />
         </fieldset>
     </form>
 </div>
+@if (TempData["success"] != null)
+{
+    @Html.Label((string)TempData["Success"])
+}

@@ -19,6 +19,12 @@
     <Compile Remove="Data\Migrations\20190429071929_Initial.Designer.cs" />
     <Compile Remove="Migrations\20190430073601_tob.cs" />
     <Compile Remove="Migrations\20190430073601_tob.Designer.cs" />
+    <Compile Remove="Migrations\20190430093820_tob.cs" />
+    <Compile Remove="Migrations\20190430093820_tob.Designer.cs" />
+    <Compile Remove="Migrations\20190506114228_tob.cs" />
+    <Compile Remove="Migrations\20190506114228_tob.Designer.cs" />
+    <Compile Remove="Migrations\20190507100407_tob.cs" />
+    <Compile Remove="Migrations\20190507100407_tob.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +41,7 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>
