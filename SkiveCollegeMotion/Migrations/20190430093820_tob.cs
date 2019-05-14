@@ -2,12 +2,28 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace SkiveCollegeMotion.Data.Migrations
+namespace SkiveCollegeMotion.Migrations
 {
-    public partial class CreateIdentitySchema : Migration
+    public partial class tob : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Aktivitet",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Navn = table.Column<string>(nullable: true),
+                    Sted = table.Column<string>(nullable: true),
+                    Antal = table.Column<int>(nullable: false),
+                    Ansvarlig = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Aktivitet", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -40,7 +56,10 @@ namespace SkiveCollegeMotion.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Navn = table.Column<string>(nullable: true),
+                    Hold = table.Column<string>(nullable: true),
+                    ElevType = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -195,6 +214,9 @@ namespace SkiveCollegeMotion.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Aktivitet");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 

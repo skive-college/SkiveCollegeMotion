@@ -67,7 +67,8 @@ namespace SkiveCollegeMotion
                     policy.RequireAssertion(context =>
                         context.User.HasClaim(c =>
                             (c.Type == "UserType") &&
-                            c.Value == "Teacher")));
+                            (c.Value == "Teacher" ||
+                            c.Value == "SuperUser"))));
             });
 
             services.AddTransient<IEmailSender, EmailSender>(i => new EmailSender(
@@ -82,6 +83,7 @@ namespace SkiveCollegeMotion
             services.AddMvc()
                 .AddRazorPagesOptions(options =>
                 {
+                    options.Conventions.AuthorizeFolder("/");
                     options.Conventions.AuthorizeFolder("/Admin", "Admin");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
@@ -117,6 +119,7 @@ namespace SkiveCollegeMotion
             UserManager<ApplicationUser> userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var poweruser = new ApplicationUser
             {
+                Navn = Configuration["SuperUser:UserName"],
                 UserName = Configuration["SuperUser:UserName"]
             };
 
@@ -128,7 +131,7 @@ namespace SkiveCollegeMotion
                 var createPowerUser = await userManager.CreateAsync(poweruser, pwd);
                 if (createPowerUser.Succeeded)
                 {
-                    await userManager.AddClaimAsync(poweruser, new Claim("UserType", "Teacher"));
+                    await userManager.AddClaimAsync(poweruser, new Claim("UserType", "SuperUser"));
                 }
             }
         }

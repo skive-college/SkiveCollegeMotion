@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using SkiveCollegeMotion.Models;
 using SkiveCollegeMotion.Data;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Claims;
+using SkiveCollegeMotion.Models;
 
-namespace SkiveCollegeMotion.Pages.Admin.Elever
+namespace SkiveCollegeMotion.Pages.Admin.Brugere
 {
     public class IndexModel : PageModel
     {
@@ -23,11 +23,11 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
             _userManager = userManager;
         }
 
-        public IList<ApplicationUser> Elev { get; set; }
+        public IList<ApplicationUser> Brugere { get;set; }
 
         public async Task OnGetAsync()
         {
-            Elev = await _userManager.GetUsersForClaimAsync(new Claim("UserType", "Student"));
+            Brugere = await _userManager.GetUsersForClaimAsync(new Claim("UserType", "Teacher"));
         }
     }
 }
