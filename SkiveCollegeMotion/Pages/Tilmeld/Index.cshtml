@@ -1,32 +1,36 @@
 ﻿@page
 @model SkiveCollegeMotion.Pages.Tilmeld.IndexModel
-
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Tilmeld";
 }
 
 <h2>Tilmeld aktivitet</h2>
 
-<div class="form-group">
-    <form method="post">
-        <fieldset>
-            <legend></legend>
-            <br />
-            <div class="tilmeld">
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @if (TempData["success"] != null)
+            {
+                <label class="text-success">@((string)TempData["success"])</label>
+            }
+            <div class="form-group">
                 <br />
                 @foreach (var item in Model.Aktivitet)
                 {
-                    @Html.RadioButtonFor(model => model.Valg, item.ID)
-                    @Html.Label("   " + item.Navn + " (" + item.Antal + ")");
+                    int remaining = await Model.GetRemainingAsync(item);
+                    @Html.RadioButtonFor(model => model.Valg, item.ID, (remaining < 1) ? new { @disabled="disabled" } : null)
+                    <label class="radio-label">@item.Navn (@remaining)</label>
                     <br />
                 }
             </div>
             <br />
-            <input type="submit" value="Submit" class="btn btn-default" />
-        </fieldset>
-    </form>
+            <input type="submit" value="Tilmeld" class="btn btn-default" />
+        </form>
+    </div>
 </div>
-@if (TempData["success"] != null)
-{
-    @Html.Label((string)TempData["Success"])
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

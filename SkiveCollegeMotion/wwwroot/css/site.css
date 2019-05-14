@@ -126,6 +126,9 @@ header img {
 .body-content {
     margin-top: 4em;
 }
-.tilmeld input[type="radio"] {
+input[type="radio"] {
     margin-right: 1em;
 }
+    input[type="radio"]:disabled + label {
+        color: #ccc;
+    }

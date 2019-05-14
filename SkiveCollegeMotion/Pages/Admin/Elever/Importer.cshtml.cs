@@ -71,7 +71,7 @@ namespace SkiveCollegeMotion.Pages.Admin.Elever
                             values: new { area = "Identity" },
                             protocol: Request.Scheme);
                         string link = HtmlEncoder.Default.Encode(callbackUrl);
-                        await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
+                        //await _emailSender.SendEmailAsync(user.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
 
                         var result = await _userManager.CreateAsync(user, password);
                         if (result.Succeeded)

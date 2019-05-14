@@ -15,7 +15,6 @@ namespace SkiveCollegeMotion.Data
         {
         }
         public DbSet<Aktivitet> Aktivitet { get; set; }
-        public DbSet<Bruger> Bruger { get; set; }
         public DbSet<Tilmelding> Tilmelding { get; set; }
     }
 }

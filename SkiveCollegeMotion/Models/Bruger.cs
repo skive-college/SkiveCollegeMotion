@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SkiveCollegeMotion.Models
 {
+    /// <summary>
+    /// For Scaffolding and validating ApplicationUser, not for direct use.
+    /// </summary>
 	public class Bruger
     {
         [Required]

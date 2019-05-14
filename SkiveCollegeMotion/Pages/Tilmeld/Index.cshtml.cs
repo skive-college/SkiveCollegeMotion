@@ -22,13 +22,15 @@ namespace SkiveCollegeMotion.Pages.Tilmeld
         {
             _context = context;
             _userManager = userManager;
+
+            
         }
 
         public IList<Aktivitet> Aktivitet { get; set; }
 
         public int Valg { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Aktivitet = await _context.Aktivitet.ToListAsync();
 
@@ -38,22 +40,24 @@ namespace SkiveCollegeMotion.Pages.Tilmeld
             {
                 Valg = current.Aktivitet;
             }
+            return Page();
         }
         
         public async Task<IActionResult> OnPostAsync()
         {
+            Aktivitet = await _context.Aktivitet.ToListAsync();
             Valg = int.Parse(Request.Form["Valg"]);
             // Handle attempt at choosing nonexistant activity
-            if (await _context.Aktivitet.AnyAsync(a => a.ID == Valg))
+            Aktivitet valgtAktivitet = await _context.Aktivitet.FindAsync(Valg);
+
+            if (valgtAktivitet == null)
             {
                 ModelState.AddModelError(string.Empty, "Den valgte aktivitet findes ikke");
                 return Page();
             }
-            Aktivitet = await _context.Aktivitet.ToListAsync();
             if (ModelState.IsValid)
             {
-                int remaining = await _context.Tilmelding.CountAsync(t => t.Aktivitet == Valg);
-                if (remaining < 1)
+                if ((await GetRemainingAsync(valgtAktivitet)) < 1)
                 {
                     ModelState.AddModelError(string.Empty, "Holdet er desværre fuldtegnet");
                 }
@@ -66,17 +70,16 @@ namespace SkiveCollegeMotion.Pages.Tilmeld
                         if (Valg == current.Aktivitet)
                         {
                             // Already correct, do nothing
-                            TempData["success"] = "Du er allerede meldt til " + (await _context.Aktivitet.FirstOrDefaultAsync(a => a.ID == Valg)).Navn;
+                            TempData["success"] = "Du er allerede meldt til " + valgtAktivitet.Navn;
                         }
                         else
                         {
                             // Change selection
                             string oldActivity = (await _context.Aktivitet.FirstOrDefaultAsync(a => a.ID == current.Aktivitet)).Navn;
-                            string newActivity = (await _context.Aktivitet.FirstOrDefaultAsync(a => a.ID == Valg)).Navn;
 
                             _context.Tilmelding.Attach(current);
                             current.Aktivitet = Valg;
-                            TempData["success"] = $"Din tilmelding er blevet skiftet fra {oldActivity} til {newActivity}";
+                            TempData["success"] = $"Din tilmelding er blevet skiftet fra {oldActivity} til {valgtAktivitet.Navn}";
                         }
                     }
                     else
@@ -88,12 +91,17 @@ namespace SkiveCollegeMotion.Pages.Tilmeld
                             Aktivitet = Valg
                         });
                         // Add 1 cause ID is 1-based as opposed to everything else being 0-based
-                        TempData["success"] = "Du er nu tilmeldt til " + (await _context.Aktivitet.FirstOrDefaultAsync(a => a.ID == Valg)).Navn;
+                        TempData["success"] = "Du er nu tilmeldt til " + valgtAktivitet.Navn;
                     }
                     await _context.SaveChangesAsync();
                 }
             }
             return Page();
+        }
+
+        public async Task<int> GetRemainingAsync(Aktivitet aktivitet)
+        {
+            return aktivitet.Antal - await _context.Tilmelding.CountAsync(t => t.Aktivitet == aktivitet.ID);
         }
     }
 }
