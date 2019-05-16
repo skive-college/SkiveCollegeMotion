@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using SkiveCollegeMotion.Data;
 using SkiveCollegeMotion.Models;
 
-namespace SkiveCollegeMotion.Pages.Admin.Brugere
+namespace SkiveCollegeMotion.Pages.Brugere
 {
     public class IndexModel : PageModel
     {

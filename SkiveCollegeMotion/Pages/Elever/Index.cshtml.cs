@@ -10,7 +10,7 @@ using SkiveCollegeMotion.Data;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 
-namespace SkiveCollegeMotion.Pages.Admin.Elever
+namespace SkiveCollegeMotion.Pages.Elever
 {
     public class IndexModel : PageModel
     {

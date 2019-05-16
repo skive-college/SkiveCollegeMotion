@@ -13,7 +13,7 @@ using SkiveCollegeMotion.Data;
 using SkiveCollegeMotion.Models;
 using SkiveCollegeMotion.Utils;
 
-namespace SkiveCollegeMotion.Pages.Admin.Brugere
+namespace SkiveCollegeMotion.Pages.Brugere
 {
     public class OpretModel : PageModel
     {

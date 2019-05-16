@@ -5,18 +5,19 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SkiveCollegeMotion.Data;
 using SkiveCollegeMotion.Models;
 
-namespace SkiveCollegeMotion.Pages.Admin.Brugere
+namespace SkiveCollegeMotion.Pages.Brugere
 {
-    public class SletModel : PageModel
+    public class RedigerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public SletModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public RedigerModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -32,7 +33,7 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
                 return NotFound();
             }
 
-            Bruger = await _userManager.FindByNameAsync(id);
+            Bruger = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == id);
 
             if (Bruger == null)
             {
@@ -41,20 +42,23 @@ namespace SkiveCollegeMotion.Pages.Admin.Brugere
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string id)
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (id == null)
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
+            
+            ApplicationUser user = await _userManager.FindByNameAsync(Bruger.UserName);
+
+            if(user == null)
             {
                 return NotFound();
             }
 
-            Bruger = await _userManager.FindByNameAsync(id);
-
-            if (Bruger != null)
-            {
-                await _userManager.DeleteAsync(Bruger);
-                await _context.SaveChangesAsync();
-            }
+            user.Email = Bruger.Email;
+            user.Navn = Bruger.Navn;
+            await _userManager.UpdateAsync(user);
 
             return RedirectToPage("./Index");
         }

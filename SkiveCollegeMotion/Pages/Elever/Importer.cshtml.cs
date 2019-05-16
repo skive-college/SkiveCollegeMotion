@@ -21,7 +21,7 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 
-namespace SkiveCollegeMotion.Pages.Admin.Elever
+namespace SkiveCollegeMotion.Pages.Elever
 {
     public class ImporterModel : PageModel
     {

@@ -1,32 +1,32 @@
 ﻿@page
-@model SkiveCollegeMotion.Pages.Admin.Brugere.IndexModel
+@model SkiveCollegeMotion.Pages.Elever.IndexModel
 
 @{
     ViewData["Title"] = "Brugere";
 }
 
-<h2>Index</h2>
+<h2>Elever</h2>
 
 <p>
-    <a asp-page="Opret">Create New</a>
+    <a asp-page="Importer">Importer csv</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Brugere[0].Navn)
+                @Html.DisplayNameFor(model => model.Elev[0].Navn)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brugere[0].UserName)
+                @Html.DisplayNameFor(model => model.Elev[0].UserName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Brugere[0].Email)
+                @Html.DisplayNameFor(model => model.Elev[0].Email)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Brugere) {
+@foreach (var item in Model.Elev) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Navn)
@@ -36,10 +36,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                <a asp-page="./Rediger" asp-route-id="@item.UserName">Edit</a> |
-                <a asp-page="./Slet" asp-route-id="@item.UserName">Delete</a>
             </td>
         </tr>
 }

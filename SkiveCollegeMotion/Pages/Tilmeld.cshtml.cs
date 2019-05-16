@@ -11,19 +11,17 @@ using Microsoft.EntityFrameworkCore;
 using SkiveCollegeMotion.Data;
 using SkiveCollegeMotion.Models;
 
-namespace SkiveCollegeMotion.Pages.Tilmeld
+namespace SkiveCollegeMotion.Pages
 {
-    public class IndexModel : PageModel
+    public class TilmeldModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public TilmeldModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
-
-            
         }
 
         public IList<Aktivitet> Aktivitet { get; set; }
@@ -47,9 +45,9 @@ namespace SkiveCollegeMotion.Pages.Tilmeld
         {
             Aktivitet = await _context.Aktivitet.ToListAsync();
             Valg = int.Parse(Request.Form["Valg"]);
-            // Handle attempt at choosing nonexistant activity
             Aktivitet valgtAktivitet = await _context.Aktivitet.FindAsync(Valg);
 
+            // Handle attempt at choosing nonexistant activity
             if (valgtAktivitet == null)
             {
                 ModelState.AddModelError(string.Empty, "Den valgte aktivitet findes ikke");

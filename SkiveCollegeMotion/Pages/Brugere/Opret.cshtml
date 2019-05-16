@@ -1,11 +1,11 @@
 ﻿@page
-@model SkiveCollegeMotion.Pages.Admin.Brugere.RedigerModel
+@model SkiveCollegeMotion.Pages.Brugere.OpretModel
 
 @{
-    ViewData["Title"] = "Rediger";
+    ViewData["Title"] = "Opret";
 }
 
-<h2>Rediger</h2>
+<h2>Opret</h2>
 
 <h4>Bruger</h4>
 <hr />
@@ -18,21 +18,25 @@
                 <input asp-for="Bruger.Navn" class="form-control" />
                 <span asp-validation-for="Bruger.Navn" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="Bruger.UserName" />
+            <div class="form-group">
+                <label asp-for="Bruger.Login" class="control-label"></label>
+                <input asp-for="Bruger.Login" class="form-control" />
+                <span asp-validation-for="Bruger.Login" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Bruger.Email" class="control-label"></label>
                 <input asp-for="Bruger.Email" class="form-control" />
                 <span asp-validation-for="Bruger.Email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="Index">Back to List</a>
 </div>
 
 @section Scripts {

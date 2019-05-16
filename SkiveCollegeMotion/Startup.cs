@@ -68,7 +68,12 @@ namespace SkiveCollegeMotion
                         context.User.HasClaim(c =>
                             (c.Type == "UserType") &&
                             (c.Value == "Teacher" ||
-                            c.Value == "SuperUser"))));
+                             c.Value == "SuperUser"))));
+                options.AddPolicy("Elev", policy =>
+                    policy.RequireAssertion(context =>
+                        context.User.HasClaim(c =>
+                            (c.Type == "UserType") &&
+                             c.Value == "Student")));
             });
 
             services.AddTransient<IEmailSender, EmailSender>(i => new EmailSender(
@@ -84,7 +89,12 @@ namespace SkiveCollegeMotion
                 .AddRazorPagesOptions(options =>
                 {
                     options.Conventions.AuthorizeFolder("/");
-                    options.Conventions.AuthorizeFolder("/Admin", "Admin");
+
+                    options.Conventions.AuthorizeFolder("/Aktiviteter", "Admin");
+                    options.Conventions.AuthorizeFolder("/Brugere", "Admin");
+                    options.Conventions.AuthorizeFolder("/Elever", "Admin");
+
+                    options.Conventions.AuthorizePage("/Tilmeld", "Elev");
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
