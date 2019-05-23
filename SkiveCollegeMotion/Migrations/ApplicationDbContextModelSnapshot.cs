@@ -162,6 +162,8 @@ namespace SkiveCollegeMotion.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Efternavn");
+
                     b.Property<string>("ElevType");
 
                     b.Property<string>("Email")
@@ -169,13 +171,13 @@ namespace SkiveCollegeMotion.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("Fornavn");
+
                     b.Property<string>("Hold");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Navn");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);

@@ -68,7 +68,7 @@ namespace SkiveCollegeMotion.Utils
             {
                 if (!usedTypes[i])
                 {
-                    // Add 1 as max is exclusive in the function but inclusive is wanted here.
+                    // Add 1 as max is an exclusive function but inclusivity is wanted here.
                     int index = getRandomInt(0, password.Length + 1);
                     char character = (char)getRandomInt(types[i, 0], types[i, 1]);
                     password = password.Insert(index, character.ToString());

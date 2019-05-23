@@ -59,9 +59,12 @@ namespace SkiveCollegeMotion.Pages.Elever
                     {
                         var user = new ApplicationUser
                         {
-                            Navn = record.FirstName + " " + record.LastName,
+                            Fornavn = record.FirstName,
+                            Efternavn = record.LastName,
                             UserName = record.Username,
-                            Email = record.Username + "@skivecollege.dk"
+                            Email = record.Username + "@skivecollege.dk",
+                            Hold = record.Hold,
+                            ElevType = record.ElevType
                         };
                         string password = Security.getNewPassword();
 

@@ -9,7 +9,9 @@ namespace SkiveCollegeMotion.Models
 	public class Bruger
     {
         [Required]
-        public string Navn { get; set; }
+        public string Fornavn { get; set; }
+        [Required]
+        public string Efternavn { get; set; }
         [Key]
         [Required]
         [StringLength(8, MinimumLength = 8)]

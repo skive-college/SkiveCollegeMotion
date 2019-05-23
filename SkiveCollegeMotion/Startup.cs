@@ -58,7 +58,6 @@ namespace SkiveCollegeMotion
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<ApplicationUser>()
-                //.AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddAuthorization(options =>
@@ -93,6 +92,7 @@ namespace SkiveCollegeMotion
                     options.Conventions.AuthorizeFolder("/Aktiviteter", "Admin");
                     options.Conventions.AuthorizeFolder("/Brugere", "Admin");
                     options.Conventions.AuthorizeFolder("/Elever", "Admin");
+                    options.Conventions.AuthorizeFolder("/Tilmeldinger", "Admin");
 
                     options.Conventions.AuthorizePage("/Tilmeld", "Elev");
                 })
@@ -129,7 +129,7 @@ namespace SkiveCollegeMotion
             UserManager<ApplicationUser> userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             var poweruser = new ApplicationUser
             {
-                Navn = Configuration["SuperUser:UserName"],
+                Fornavn = Configuration["SuperUser:UserName"],
                 UserName = Configuration["SuperUser:UserName"]
             };
 

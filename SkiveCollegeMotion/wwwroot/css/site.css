@@ -132,3 +132,6 @@ input[type="radio"] {
     input[type="radio"]:disabled + label {
         color: #ccc;
     }
+.aid0 {
+    color: #f00;
+}

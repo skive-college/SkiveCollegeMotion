@@ -5,6 +5,12 @@ namespace SkiveCollegeMotion.Models
 {
     public class Elev
     {
+        [Index(0)]
+        public string ElevType { get; set; }
+
+        [Index(1)]
+        public string Hold { get; set; }
+
         [Index(2)]
         public string Username { get; set; }
 

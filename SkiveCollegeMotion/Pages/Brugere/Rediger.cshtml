@@ -14,9 +14,14 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Bruger.Navn" class="control-label"></label>
-                <input asp-for="Bruger.Navn" class="form-control" />
-                <span asp-validation-for="Bruger.Navn" class="text-danger"></span>
+                <label asp-for="Bruger.Fornavn" class="control-label"></label>
+                <input asp-for="Bruger.Fornavn" class="form-control" />
+                <span asp-validation-for="Bruger.Fornavn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bruger.Efternavn" class="control-label"></label>
+                <input asp-for="Bruger.Efternavn" class="form-control" />
+                <span asp-validation-for="Bruger.Efternavn" class="text-danger"></span>
             </div>
             <input type="hidden" asp-for="Bruger.UserName" />
             <div class="form-group">

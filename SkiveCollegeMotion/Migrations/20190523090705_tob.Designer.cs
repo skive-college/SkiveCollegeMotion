@@ -10,7 +10,7 @@ using SkiveCollegeMotion.Data;
 namespace SkiveCollegeMotion.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190514075543_tob")]
+    [Migration("20190523090705_tob")]
     partial class tob
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -164,6 +164,8 @@ namespace SkiveCollegeMotion.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<string>("Efternavn");
+
                     b.Property<string>("ElevType");
 
                     b.Property<string>("Email")
@@ -171,13 +173,13 @@ namespace SkiveCollegeMotion.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("Fornavn");
+
                     b.Property<string>("Hold");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Navn");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);

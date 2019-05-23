@@ -57,7 +57,8 @@ namespace SkiveCollegeMotion.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Navn = table.Column<string>(nullable: true),
+                    Fornavn = table.Column<string>(nullable: true),
+                    Efternavn = table.Column<string>(nullable: true),
                     Hold = table.Column<string>(nullable: true),
                     ElevType = table.Column<string>(nullable: true)
                 },

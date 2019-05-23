@@ -57,7 +57,8 @@ namespace SkiveCollegeMotion.Pages.Brugere
             }
 
             user.Email = Bruger.Email;
-            user.Navn = Bruger.Navn;
+            user.Fornavn = Bruger.Fornavn;
+            user.Efternavn = Bruger.Efternavn;
             await _userManager.UpdateAsync(user);
 
             return RedirectToPage("./Index");
