@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 
 namespace SkiveCollegeMotion.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        [DisplayName("Unilogin")]
+        public override string UserName { get => base.UserName; set => base.UserName = value; }
         public string Fornavn { get; set; }
         public string Efternavn { get; set; }
         public string Hold { get; set; }

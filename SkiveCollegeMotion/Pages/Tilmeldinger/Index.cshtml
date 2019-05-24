@@ -4,11 +4,12 @@
 @{
     ViewData["Title"] = "Tilmeldinger";
 }
-
 <h2>Tilmeldinger</h2>
-
-@Html.RouteLink("Sorter for aktiviteter", new { sort = "aktivitet" }) |
-@Html.RouteLink("Sorter for hold", new { sort = "hold" })
+<div class="hidden-print">
+    <button type="button" onclick="window.print()">Print</button>
+    @Html.RouteLink("Sorter for aktiviteter", new { sort = "aktivitet" }) |
+    @Html.RouteLink("Sorter for hold", new { sort = "hold" })
+</div>
 @foreach (var group in Model.Tilmeldinger)
 {
     <h4>@group.Key</h4>
@@ -43,37 +44,37 @@
             </tr>
         </thead>
         <tbody>
-           @foreach (var tilmelding in group)
-           {
-            <tr class=@("aid" + Model.Activities.First(a => a.ID == tilmelding.Aktivitet).ID)>
-                <td>
-                    @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Fornavn)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Efternavn)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).UserName)
-                </td>
-                @if (!(Model.SortOrder != "hold" && group.Key == "Ikke tilmeldt"))
-                {
+            @foreach (var tilmelding in group)
+            {
+                <tr class=@("aid" + Model.Activities.First(a => a.ID == tilmelding.Aktivitet).ID)>
                     <td>
-                        @Html.DisplayFor(model => model.Activities.First(a => a.ID == tilmelding.Aktivitet).Ansvarlig)
+                        @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Fornavn)
                     </td>
-                }
-                @if (Model.SortOrder == "hold")
-                {
                     <td>
-                        @Html.DisplayFor(model => model.Activities.First(a => a.ID == tilmelding.Aktivitet).Navn)
+                        @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Efternavn)
                     </td>
-                }
-                else
-                {
                     <td>
-                        @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Hold)
+                        @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).UserName)
                     </td>
-                }
-            </tr>
+                    @if (!(Model.SortOrder != "hold" && group.Key == "Ikke tilmeldt"))
+                    {
+                        <td>
+                            @Html.DisplayFor(model => model.Activities.First(a => a.ID == tilmelding.Aktivitet).Ansvarlig)
+                        </td>
+                    }
+                    @if (Model.SortOrder == "hold")
+                    {
+                        <td>
+                            @Html.DisplayFor(model => model.Activities.First(a => a.ID == tilmelding.Aktivitet).Navn)
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.DisplayFor(model => model.Students.First(s => s.UserName == tilmelding.Elev).Hold)
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>

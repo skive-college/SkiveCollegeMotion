@@ -1,6 +1,10 @@
+using Microsoft.AspNetCore.Identity.UI.Services;
+using SkiveCollegeMotion.Models;
 using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SkiveCollegeMotion.Utils
 {
@@ -8,7 +12,7 @@ namespace SkiveCollegeMotion.Utils
     {
         private static readonly RNGCryptoServiceProvider csp = new RNGCryptoServiceProvider();
 
-        public static int getRandomInt(int minValue, int maxExclusiveValue)
+        private static int getRandomInt(int minValue, int maxExclusiveValue)
         {
             if (minValue >= maxExclusiveValue)
                 throw new ArgumentOutOfRangeException("minValue must be lower than maxExclusiveValue");
@@ -28,7 +32,7 @@ namespace SkiveCollegeMotion.Utils
             return (int)(minValue + (ui % diff));
         }
         
-        public static string getNewPassword()
+        public static string generatePassword()
         {
             int length = 8;
             // Create 2D array with info on the different types of wanted characters with following format:
@@ -75,6 +79,11 @@ namespace SkiveCollegeMotion.Utils
                 }
             }
             return password;
+        }
+
+        public static async Task setUserPassword(IEmailSender emailSender, string email)
+        {
+            var password = generatePassword();
         }
     }
 }

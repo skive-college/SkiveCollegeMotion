@@ -66,7 +66,7 @@ namespace SkiveCollegeMotion.Pages.Elever
                             Hold = record.Hold,
                             ElevType = record.ElevType
                         };
-                        string password = Security.getNewPassword();
+                        string password = Security.generatePassword();
 
                         var callbackUrl = Url.Page(
                             "/Account/Login",

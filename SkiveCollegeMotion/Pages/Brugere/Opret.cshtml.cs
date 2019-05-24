@@ -52,7 +52,7 @@ namespace SkiveCollegeMotion.Pages.Brugere
                     UserName = Bruger.Login,
                     Email = Bruger.Email
                 };
-                string password = Security.getNewPassword();
+                string password = Security.generatePassword();
                 IdentityResult result = await _userManager.CreateAsync(bruger, password);
                 if (result.Succeeded)
                 {
@@ -65,7 +65,7 @@ namespace SkiveCollegeMotion.Pages.Brugere
                             values: new { area = "Identity" },
                             protocol: Request.Scheme);
                         string link = HtmlEncoder.Default.Encode(callbackUrl);
-                        //await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
+                        await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                         return RedirectToPage("./Index");
                     }
                 }

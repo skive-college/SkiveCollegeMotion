@@ -55,7 +55,7 @@ namespace SkiveCollegeMotion.Areas.Identity.Pages.Account
                         values: new { area = "Identity" },
                         protocol: Request.Scheme);
                 string link = HtmlEncoder.Default.Encode(callbackUrl);
-                string password = Security.getNewPassword();
+                string password = Security.generatePassword();
                 await _emailSender.SendEmailAsync(Input.Email, "Motion", $"Din nye adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
                 
                 // Either token or previous password is needed to change password, so just generate and immediately use a token
