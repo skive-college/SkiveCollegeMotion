@@ -10,8 +10,8 @@ using SkiveCollegeMotion.Data;
 namespace SkiveCollegeMotion.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190430093820_tob")]
-    partial class tob
+    [Migration("20190506114447_mri")]
+    partial class mri
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -209,6 +209,23 @@ namespace SkiveCollegeMotion.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("SkiveCollegeMotion.Models.Bruger", b =>
+                {
+                    b.Property<string>("Login")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(8);
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Navn")
+                        .IsRequired();
+
+                    b.HasKey("Login");
+
+                    b.ToTable("Bruger");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

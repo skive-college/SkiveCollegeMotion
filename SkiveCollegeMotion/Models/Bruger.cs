@@ -7,6 +7,7 @@ namespace SkiveCollegeMotion.Models
     {
         [Required]
         public string Navn { get; set; }
+        
         [Key]
         [Required]
         [StringLength(8, MinimumLength = 8)]

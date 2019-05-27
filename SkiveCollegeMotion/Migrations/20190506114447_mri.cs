@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SkiveCollegeMotion.Migrations
 {
-    public partial class tob : Migration
+    public partial class mri : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,19 @@ namespace SkiveCollegeMotion.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bruger",
+                columns: table => new
+                {
+                    Navn = table.Column<string>(nullable: false),
+                    Login = table.Column<string>(maxLength: 8, nullable: false),
+                    Email = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bruger", x => x.Login);
                 });
 
             migrationBuilder.CreateTable(
@@ -231,6 +244,9 @@ namespace SkiveCollegeMotion.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Bruger");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

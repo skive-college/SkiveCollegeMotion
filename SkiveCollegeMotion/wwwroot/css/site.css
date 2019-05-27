@@ -75,7 +75,6 @@ header img {
 .btn-default {
     background-image: linear-gradient(to top right, #2865fa, #02e5a9);
     font-weight: bold;
-    /*color: #444;*/
     color: white;
 }
 .navbar-brand {
@@ -103,7 +102,6 @@ header img {
     }
     .create {
         padding: 25px 0;
-
     }
 .create-it {
     margin-top: 4em;

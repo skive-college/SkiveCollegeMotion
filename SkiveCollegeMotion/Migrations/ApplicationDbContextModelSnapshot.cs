@@ -209,6 +209,23 @@ namespace SkiveCollegeMotion.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("SkiveCollegeMotion.Models.Bruger", b =>
+                {
+                    b.Property<string>("Login")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(8);
+
+                    b.Property<string>("Email")
+                        .IsRequired();
+
+                    b.Property<string>("Navn")
+                        .IsRequired();
+
+                    b.HasKey("Login");
+
+                    b.ToTable("Bruger");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")

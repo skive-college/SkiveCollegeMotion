@@ -15,7 +15,7 @@
                 <div class="tilmeld">
                     <br />
                     @foreach (var item in Model.Aktivitet) {
-                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label("   " + item.Navn + " (" + item.Antal + ")"); <br />
+                    @Html.RadioButtonFor(model => model.Aktivitet, item.ID) @Html.Label( item.Navn + " (" + item.Antal + ")"); <br />
                 }
                 </div>
                 <br />
