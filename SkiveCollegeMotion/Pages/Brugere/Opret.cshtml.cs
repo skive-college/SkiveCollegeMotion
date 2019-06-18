@@ -59,13 +59,7 @@ namespace SkiveCollegeMotion.Pages.Brugere
                     result = await _userManager.AddClaimAsync(bruger, new Claim("UserType", "Teacher"));
                     if (result.Succeeded)
                     {
-                        var callbackUrl = Url.Page(
-                            "/Account/Login",
-                            pageHandler: null,
-                            values: new { area = "Identity" },
-                            protocol: Request.Scheme);
-                        string link = HtmlEncoder.Default.Encode(callbackUrl);
-                        await _emailSender.SendEmailAsync(bruger.Email, "Motion", $"Din adgangskode er: {password}.<br>Du kan logge på ved at <a href='{link}'>klikke her</a>.");
+                        await _emailSender.SendEmailAsync(bruger.Email, "Tilmeld motionshold på Skive College", $"Kære {bruger.Fornavn}<br><br>På Skive College er der motion Mandag og Torsdag, for at tilmelde dig skal du via følgende link: https://Studyweb.dk/Login tilmelde dig de aktiviteter du ønsker at følge det næste semester.<br><br>Du logger på med dit unilogin som brugernavn.<br><br>Din personlige adgangskode er: {password}.<br><br>Venlig hilsen<br><br>Motions teamet på Skive College");
                         return RedirectToPage("./Index");
                     }
                 }

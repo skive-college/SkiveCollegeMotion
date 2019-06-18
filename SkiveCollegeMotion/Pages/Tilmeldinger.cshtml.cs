@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore;
 using SkiveCollegeMotion.Data;
 using SkiveCollegeMotion.Models;
 
-namespace SkiveCollegeMotion.Pages.Tilmeldinger
+namespace SkiveCollegeMotion.Pages
 {
-    public class IndexModel : PageModel
+    public class TilmeldingerModel : PageModel
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public IndexModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public TilmeldingerModel(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -28,8 +28,9 @@ namespace SkiveCollegeMotion.Pages.Tilmeldinger
         public IList<ApplicationUser> Students { get; set; }
         public IList<IGrouping<string, Tilmelding>> Tilmeldinger { get; set; }
         public string SortOrder { get; set; }
+        public int Day { get; set; }
 
-        public async Task OnGetAsync(string sort)
+        public async Task OnGetAsync(string sort, string dag)
         {
             Students = await _userManager.GetUsersForClaimAsync(new System.Security.Claims.Claim("UserType", "Student"));
 
@@ -42,6 +43,8 @@ namespace SkiveCollegeMotion.Pages.Tilmeldinger
 
             // Convert to lowercase for more forgiving manual parameter construction
             SortOrder = (sort ?? "aktivitet").ToLower();
+            Enum.TryParse(dag ?? Enum.GetName(typeof(Tilmelding.Day), 0), true, out Tilmelding.Day day);
+            Day = (int)day;
             Activities = await _context.Aktivitet.ToListAsync();
 
             Activities.Add(new Aktivitet() {
@@ -52,9 +55,9 @@ namespace SkiveCollegeMotion.Pages.Tilmeldinger
                 Ansvarlig=string.Empty
             });
 
-            List<Tilmelding> tilmeldinger = await _context.Tilmelding.ToListAsync();
+            List<Tilmelding> tilmeldinger = await _context.Tilmelding.Where(t => t.Dag == Day).ToListAsync();
 
-            IEnumerable<Tilmelding> missing = Students.Where(s => !tilmeldinger.Exists(t => t.Elev == s.UserName)).Select(s => new Tilmelding() { Elev = s.UserName, Aktivitet = 0 });
+            IEnumerable<Tilmelding> missing = Students.Where(s => !tilmeldinger.Exists(t => (t.Elev == s.UserName) && (t.Dag == Day))).Select(s => new Tilmelding() { Elev = s.UserName, Aktivitet = 0, Dag=Day });
             tilmeldinger.AddRange(missing);
 
             tilmeldinger = tilmeldinger.OrderBy(t => {

@@ -14,7 +14,7 @@ namespace SkiveCollegeMotion.Models
         public string Efternavn { get; set; }
         [Key]
         [Required]
-        [StringLength(8, MinimumLength = 8)]
+        [StringLength(8, MinimumLength = 2)]
         public string Login { get; set; }
         [Required]
         [EmailAddress]

@@ -1,14 +1,18 @@
 ﻿@page
-@model SkiveCollegeMotion.Pages.Tilmeldinger.IndexModel
+@model SkiveCollegeMotion.Pages.TilmeldingerModel
 
 @{
-    ViewData["Title"] = "Tilmeldinger";
+    ViewData["Title"] = $"Tilmeldinger {Enum.GetName(typeof(Models.Tilmelding.Day), Model.Day)}";
 }
-<h2>Tilmeldinger</h2>
+<h2>@ViewData["Title"]</h2>
 <div class="hidden-print">
-    <button type="button" onclick="window.print()">Print</button>
-    @Html.RouteLink("Sorter for aktiviteter", new { sort = "aktivitet" }) |
-    @Html.RouteLink("Sorter for hold", new { sort = "hold" })
+    @foreach (string day in Enum.GetNames(typeof(Models.Tilmelding.Day)))
+    {
+        @Html.RouteLink(day, new { dag = day, sort = Model.SortOrder }, new { @class = "btn btn-default" })
+    }
+<a class="btn btn-default" onclick="window.print()">Print</a> <br />
+    @Html.RouteLink("Sorter for aktiviteter", new { dag = Enum.GetName(typeof(Models.Tilmelding.Day), Model.Day), sort = "aktivitet" }, Model.SortOrder == "aktivitet" ? new { style = "text-decoration: underline" } : null) |
+    @Html.RouteLink("Sorter for hold", new { dag = Enum.GetName(typeof(Models.Tilmelding.Day), Model.Day), sort = "hold" }, Model.SortOrder == "hold" ? new { style = "text-decoration: underline" } : null)
 </div>
 @foreach (var group in Model.Tilmeldinger)
 {

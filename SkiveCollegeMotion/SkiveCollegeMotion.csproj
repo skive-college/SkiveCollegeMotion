@@ -27,6 +27,10 @@
     <Compile Remove="Migrations\20190507100407_tob.Designer.cs" />
     <Compile Remove="Migrations\20190514075543_tob.cs" />
     <Compile Remove="Migrations\20190514075543_tob.Designer.cs" />
+    <Compile Remove="Migrations\20190523090705_tob.cs" />
+    <Compile Remove="Migrations\20190523090705_tob.Designer.cs" />
+    <Compile Remove="Migrations\20190524102518_publish.cs" />
+    <Compile Remove="Migrations\20190524102518_publish.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

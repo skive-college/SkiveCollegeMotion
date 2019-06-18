@@ -16,5 +16,11 @@ namespace SkiveCollegeMotion.Data
         }
         public DbSet<Aktivitet> Aktivitet { get; set; }
         public DbSet<Tilmelding> Tilmelding { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Tilmelding>().HasKey(t => new { t.Elev, t.Dag });
+        }
     }
 }

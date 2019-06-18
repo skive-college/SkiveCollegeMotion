@@ -11,20 +11,28 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @if (TempData["success"] != null)
+            @for (int i = 0; i < Model.DayCount; i++)
             {
-                <label class="text-success">@((string)TempData["success"])</label>
-            }
-            <div class="form-group">
-                <br />
-                @foreach (var item in Model.Aktivitet)
+                @if (TempData["success" + i] != null)
                 {
-                    int remaining = await Model.GetRemainingAsync(item);
-                    @Html.RadioButtonFor(model => model.Valg, item.ID, (remaining < 1) ? new { @disabled="disabled" } : null)
-                    <label class="radio-label">@item.Navn (@remaining)</label>
-                    <br />
+                    <label class="text-success">@((string)TempData["success" + i])</label><br />
                 }
-            </div>
+            }
+            @for (int i = 0; i < Model.DayCount; i++)
+            {
+                <div class="form-group">
+                    <h4>
+                        @Enum.GetName(typeof(Models.Tilmelding.Day), i)
+                    </h4>
+                    @foreach (var item in Model.Aktivitet)
+                    {
+                        int remaining = await Model.GetRemainingAsync(item, i);
+                        @Html.RadioButtonFor(model => model.Valg[i], item.ID, (remaining < 1) ? new { @disabled = "disabled" } : null)
+                        <label class="radio-label">@item.Navn (@remaining pladser tilbage)</label>
+                        <br />
+                    }
+                </div>
+            }
             <br />
             <input type="submit" value="Tilmeld" class="btn btn-default" />
         </form>

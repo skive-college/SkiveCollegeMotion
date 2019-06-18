@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SkiveCollegeMotion.Data;
 
 namespace SkiveCollegeMotion.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190527093358_tob")]
+    partial class tob
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -213,13 +215,14 @@ namespace SkiveCollegeMotion.Migrations
 
             modelBuilder.Entity("SkiveCollegeMotion.Models.Tilmelding", b =>
                 {
-                    b.Property<string>("Elev");
-
-                    b.Property<int>("Dag");
+                    b.Property<string>("Elev")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("Aktivitet");
 
-                    b.HasKey("Elev", "Dag");
+                    b.Property<int>("Dag");
+
+                    b.HasKey("Elev");
 
                     b.ToTable("Tilmelding");
                 });
