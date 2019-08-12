@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Pages\Aktivitet\**" />
+    <Compile Remove="www\**" />
     <Content Remove="Pages\Aktivitet\**" />
+    <Content Remove="www\**" />
     <EmbeddedResource Remove="Pages\Aktivitet\**" />
+    <EmbeddedResource Remove="www\**" />
     <None Remove="Pages\Aktivitet\**" />
+    <None Remove="www\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,10 +35,6 @@
     <Compile Remove="Migrations\20190523090705_tob.Designer.cs" />
     <Compile Remove="Migrations\20190524102518_publish.cs" />
     <Compile Remove="Migrations\20190524102518_publish.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\images\logo.png" />
   </ItemGroup>
 
   <ItemGroup>

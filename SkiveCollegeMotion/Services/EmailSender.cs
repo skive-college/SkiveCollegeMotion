@@ -29,10 +29,6 @@ namespace SkiveCollegeMotion.Services
         
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            if(email.ToLower() != "toke0344@skivecollege.dk")
-            {
-                return null;
-            }
             var client = new SmtpClient(host, port)
             {
                 Credentials = new NetworkCredential(userName, password),

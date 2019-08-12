@@ -1,11 +1,11 @@
 ﻿@page
-@model SkiveCollegeMotion.Pages.Aktiviteter.CreateModel
+@model SkiveCollegeMotion.Pages.Aktiviteter.OpretModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Opret";
 }
 
-<h2>Create</h2>
+<h2>Opret</h2>
 
 <h4>Aktivitet</h4>
 <hr />
@@ -34,14 +34,14 @@
                 <span asp-validation-for="Aktivitet.Ansvarlig" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Opret" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Tilbage til liste</a>
 </div>
 
 @section Scripts {
