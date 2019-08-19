@@ -11,11 +11,11 @@ using SkiveCollegeMotion.Models;
 
 namespace SkiveCollegeMotion.Pages.Aktiviteter
 {
-    public class EditModel : PageModel
+    public class RedigerModel : PageModel
     {
         private readonly SkiveCollegeMotion.Data.ApplicationDbContext _context;
 
-        public EditModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
+        public RedigerModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
         {
             _context = context;
         }

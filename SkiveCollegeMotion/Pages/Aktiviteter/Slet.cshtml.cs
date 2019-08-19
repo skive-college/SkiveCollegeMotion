@@ -10,11 +10,11 @@ using SkiveCollegeMotion.Models;
 
 namespace SkiveCollegeMotion.Pages.Aktiviteter
 {
-    public class DeleteModel : PageModel
+    public class SletModel : PageModel
     {
         private readonly SkiveCollegeMotion.Data.ApplicationDbContext _context;
 
-        public DeleteModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
+        public SletModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
         {
             _context = context;
         }

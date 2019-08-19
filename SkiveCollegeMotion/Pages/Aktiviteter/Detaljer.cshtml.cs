@@ -10,11 +10,11 @@ using SkiveCollegeMotion.Models;
 
 namespace SkiveCollegeMotion.Pages.Aktiviteter
 {
-    public class DetailsModel : PageModel
+    public class DetaljerModel : PageModel
     {
         private readonly SkiveCollegeMotion.Data.ApplicationDbContext _context;
 
-        public DetailsModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
+        public DetaljerModel(SkiveCollegeMotion.Data.ApplicationDbContext context)
         {
             _context = context;
         }

@@ -1,15 +1,14 @@
 ﻿@page
-@model SkiveCollegeMotion.Pages.Aktiviteter.DeleteModel
+@model SkiveCollegeMotion.Pages.Aktiviteter.SletModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Slet";
 }
 
-<h2>Delete</h2>
+<h2>Slet</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Er du sikker på at du vil slette denne aktivitet?</h3>
 <div>
-    <h4>Aktivitet</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -40,7 +39,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Aktivitet.ID" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Slet" class="btn btn-default" /> |
+        <a asp-page="Index">Tilbage til liste</a>
     </form>
 </div>

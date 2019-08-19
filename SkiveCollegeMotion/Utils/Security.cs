@@ -80,10 +80,5 @@ namespace SkiveCollegeMotion.Utils
             }
             return password;
         }
-
-        public static async Task setUserPassword(IEmailSender emailSender, string email)
-        {
-            var password = generatePassword();
-        }
     }
 }
